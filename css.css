@@ -1,0 +1,36 @@
+
+#userInput{
+    width: 30vw;
+    height: 80vh;
+    float: left;
+}
+#box2{
+    width: 30vw;
+    height: 80vh;
+    float: left;
+}
+
+.button{
+    width: 30vw;
+    height: 26vh;
+    float: left;
+}
+#button1{
+    width: 30vw;
+    height: 28vh;
+    float: left;
+}
+#box1{
+    background-color: aquamarine;
+    width: 30vw;
+    height: 80vh;
+    float: left;
+}
+#output{
+    width: 20vw;
+    height: 60vh;
+    position: relative;
+    top: 10vh;
+    left: 5vw;
+    overflow-wrap: break-word;
+}
