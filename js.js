@@ -52,14 +52,14 @@ function changeback(){
 function gettext() {
     if(type<2){
         clearall()
-        cleartext=document.getElementById('userInput').value
+        cleartext=hanziToReversibleNumber(document.getElementById('userInput').value, 32)
         changeto()
         document.getElementById('output').innerHTML=ciphertext  
     }else{
         clearall()
         ciphertext=document.getElementById('userInput').value
         changeback()
-        document.getElementById('output').innerHTML=cleartext 
+        document.getElementById('output').innerHTML=numberToReversibleHanzi(cleartext) 
     }
     
     
@@ -81,4 +81,46 @@ function changetype(){
         type=1
         document.getElementById('button1').innerHTML="加密"
     }
+}
+
+
+
+
+
+function hanziToReversibleNumber(text, totalDigits = 16) {
+  // 将字符串转换为字节数组
+  const encoder = new TextEncoder();
+  const bytes = encoder.encode(text);
+  
+  // 将字节数组转换为大整数
+  let bigInt = 0n;
+  for (let i = 0; i < bytes.length; i++) {
+    bigInt = (bigInt << 8n) | BigInt(bytes[i]);
+  }
+  
+  // 转换为十进制字符串
+  let numStr = bigInt.toString(10);
+  
+  // 补全到指定位数
+  return numStr.padStart(totalDigits, '0');
+}
+
+function numberToReversibleHanzi(numStr) {
+  // 去除前导零
+  numStr = numStr.replace(/^0+/, '') || '0';
+  
+  // 转换为大整数
+  const bigInt = BigInt(numStr);
+  
+  // 转换为字节数组
+  const bytes = [];
+  let n = bigInt;
+  while (n > 0n) {
+    bytes.unshift(Number(n & 0xffn));
+    n = n >> 8n;
+  }
+  
+  // 解码为字符串
+  const decoder = new TextDecoder();
+  return decoder.decode(new Uint8Array(bytes));
 }

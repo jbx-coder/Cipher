@@ -34,3 +34,10 @@
     left: 5vw;
     overflow-wrap: break-word;
 }
+#box{
+    width: 92vw;
+    height: 60vh;
+    position: relative;
+    top: 10vh;
+    left: 5vw;
+}
